@@ -2,6 +2,6 @@
 #define UTILS_H
 
 // Function prototypes
-int add(int a, int b);
+int yunsuan(int a, int b);
 
 #endif // UTILS_H

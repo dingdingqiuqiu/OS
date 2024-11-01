@@ -1,5 +1,7 @@
 #include "utils.h"
 
-int add(int a, int b) {
+int yunsuan(int a, int b) {
+    int a;
     return a + b;
+    // return a * b;
 }

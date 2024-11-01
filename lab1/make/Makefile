@@ -2,7 +2,7 @@
 CC = gcc
 
 # 指定编译选项
-CFLAGS = -Wall -g
+CFLAGS = -Wall -g -Wimplicit-function-declaration
 
 # 源文件和目标文件
 SRCS = src/main.c src/utils.c

@@ -29,6 +29,7 @@ void getcmdline(void);
 int main(void)
 {
 
+    // 客户端运行
     if((shmid=shmget(MY_SHMKEY, sizeof(struct shmbuf), IPC_CREAT|IPC_EXCL|0666)) < 0)
     {/* shared memory exists, act as client */
         shmid=shmget(MY_SHMKEY, sizeof(struct shmbuf), 0666);
@@ -49,7 +50,7 @@ int main(void)
 	        getcmdline();
         }
     }
-    else		/* acts as server */
+    else		/* 作为服务器运行 */
     {
 	    int i;
         shmptr=(struct shmbuf *)shmat(shmid, 0, 0);
@@ -79,6 +80,7 @@ void relblock(void)
     }
     shmptr->top++;
     shmptr->stack[shmptr->top]=local.stack[local.top--];
+    // printf("%d\n",local.top);
 }
 
 int getblock(void)
@@ -89,9 +91,11 @@ int getblock(void)
 		return 0;
     }
     local.stack[++local.top]=shmptr->stack[shmptr->top];
+    // printf("%d\n",local.top);
     shmptr->top--;
 }
 
+// 帮助信息
 void showhelp(void)
 {
     printf("\navailable COMMAND:\n\n");
@@ -102,6 +106,7 @@ void showhelp(void)
     printf("end\texit this program\n");
 }
 
+// 列出本地获得的块
 void showlist(void)
 {
     int i;
@@ -110,6 +115,7 @@ void showlist(void)
 	    printf("%d\t", local.stack[i]);
 }
 
+// 读取命令
 void getcmdline(void)
 {
     printf("\n?> ");
